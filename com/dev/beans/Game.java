@@ -152,6 +152,24 @@ public class Game {
     public void makeMove() throws OutOfDimensionException, CellAlreadyOccupiedException {
 
 
+        if (!moves.isEmpty()){
+            System.out.print("Would you like to undo this move Y/N");
+            String ch = sc.nextLine();
+
+            if(ch.equals("Y")){
+                int last = moves.size()-1;
+
+                Move undoMove = moves.get(last);
+                moves.remove(last);
+                Cell cell = board.getBoard().get(undoMove.getRow()).get(undoMove.getCol());
+                cell.setPlayer(null);
+                cell.setSymbol(null);
+                cell.setCellState(CellState.EMPTY);
+            }
+
+        }
+
+
         Player currentPlayer = players.get(nextPlayer);
         System.out.print("Next Player is " + currentPlayer.getName() + " please make a move");
 
